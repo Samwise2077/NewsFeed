@@ -14,7 +14,7 @@ const val NEWS_STARTING_PAGE_INDEX = 1
 private const val TAG = "NewsPagingResource"
 
 class NewsPagingResource(
-    val newsApi: NewsApi,
+    private val newsApi: NewsApi,
     private val query: String
 ) : PagingSource<Int, NewsArticle>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NewsArticle> {

@@ -58,7 +58,6 @@ class HomeAdapter(private val listener: OnItemClickListener) : PagingDataAdapter
                    siteTextView.text = article.source.name
                }
            }
-
     }
 
     interface OnItemClickListener{
@@ -72,6 +71,4 @@ class HomeAdapter(private val listener: OnItemClickListener) : PagingDataAdapter
         override fun areContentsTheSame(oldItem: NewsArticle, newItem: NewsArticle) = oldItem == newItem
 
     }
-
-
 }

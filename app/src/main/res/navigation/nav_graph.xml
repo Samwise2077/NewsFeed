@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragment_to_articleFragment"
             app:destination="@id/articleFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteNewsFragment"
+            app:destination="@id/favoriteNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/articleFragment"
@@ -20,5 +23,16 @@
         <argument
             android:name="article"
             app:argType="com.example.newsfeed.data.NewsArticle" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteNewsFragment"
+        android:name="com.example.newsfeed.ui.favorite.FavoriteNewsFragment"
+        tools:layout="@layout/fragment_favorite_news">
+        <action
+            android:id="@+id/action_favoriteNewsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+        <action
+            android:id="@+id/action_favoriteNewsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

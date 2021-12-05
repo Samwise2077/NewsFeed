@@ -11,6 +11,7 @@
         <entry key="..\:/NewsFeed/app/src/main/res/layout/activity_main.xml" value="0.17617753623188406" />
         <entry key="..\:/NewsFeed/app/src/main/res/layout/fragment_article.xml" value="0.1598731884057971" />
         <entry key="..\:/NewsFeed/app/src/main/res/layout/fragment_details.xml" value="0.1598731884057971" />
+        <entry key="..\:/NewsFeed/app/src/main/res/layout/fragment_favorite_news.xml" value="0.10656753407682776" />
         <entry key="..\:/NewsFeed/app/src/main/res/layout/fragment_home.xml" value="0.16" />
         <entry key="..\:/NewsFeed/app/src/main/res/layout/fragment_saved_news.xml" value="0.22" />
         <entry key="..\:/NewsFeed/app/src/main/res/layout/item_news_article.xml" value="0.25" />

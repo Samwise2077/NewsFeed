@@ -6,13 +6,16 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
+import androidx.paging.PagingData
 import com.example.newsfeed.R
 import com.example.newsfeed.data.NewsArticle
 import com.example.newsfeed.databinding.FragmentHomeBinding
@@ -41,11 +44,22 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAdapter.OnItemClickLi
              buttonRetry.setOnClickListener {
                  adapter.retry()
              }
-
-
+             bottomNavigationView.selectedItemId = R.id.breakingNewsFragment
+             bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+                 Log.d(TAG, "onViewCreated: ${item.itemId} ${R.id.favoriteNewsFragment}")
+                 when(item.itemId){
+                     R.id.savedNewsFragment -> {
+                         Log.d(TAG, "onViewCreated: works x2")
+                         val action = HomeFragmentDirections.actionHomeFragmentToFavoriteNewsFragment()
+                         findNavController().navigate(action)
+                     }
+                 }
+                 true
+             }
          }
         Log.d(TAG, "onViewCreated: check")
         viewModel.articles.observe(viewLifecycleOwner){
+            Log.d(TAG, "${it} ")
               adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
@@ -81,6 +95,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAdapter.OnItemClickLi
         inflater.inflate(R.menu.menu_home, menu)
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if(query != null){
