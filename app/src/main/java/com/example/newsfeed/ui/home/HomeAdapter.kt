@@ -15,9 +15,10 @@ import com.example.newsfeed.databinding.ItemNewsArticleBinding
 
 private const val TAG = "HomeAdapter"
 
-class HomeAdapter : PagingDataAdapter<NewsArticle, HomeAdapter.HomeViewHolder>(DiffCallback()) {
+class HomeAdapter(private val listener: OnItemClickListener) : PagingDataAdapter<NewsArticle, HomeAdapter.HomeViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
+        Log.d(TAG, "view holder: created")
         val binding = ItemNewsArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HomeViewHolder(binding)
     }
@@ -29,12 +30,27 @@ class HomeAdapter : PagingDataAdapter<NewsArticle, HomeAdapter.HomeViewHolder>(D
         }
     }
 
-    class HomeViewHolder(private val binding: ItemNewsArticleBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class HomeViewHolder(private val binding: ItemNewsArticleBinding) : RecyclerView.ViewHolder(binding.root){
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if(position != RecyclerView.NO_POSITION){
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
            fun bind(article: NewsArticle){
                binding.apply {
+                   Log.d(TAG, "bind: ${article.title}")
+
                    Glide.with(itemView)
                        .load(article.urlToImage)
                        .transition(DrawableTransitionOptions.withCrossFade())
+                   //  .error(R.drawable.)
                        .into(picture)
                    titleTextView.text = article.title
                    dateCreatedTextView.text = article.publishedAt
@@ -43,6 +59,10 @@ class HomeAdapter : PagingDataAdapter<NewsArticle, HomeAdapter.HomeViewHolder>(D
                }
            }
 
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(article: NewsArticle)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<NewsArticle>() {

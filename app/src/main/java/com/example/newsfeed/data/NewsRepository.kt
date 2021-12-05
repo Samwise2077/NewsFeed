@@ -16,6 +16,7 @@ private const val TAG = "NewsRepository"
 @Singleton
 class NewsRepository @Inject constructor(private val newsApi: NewsApi) {
     fun getSearchResults(query: String): LiveData<PagingData<NewsArticle>> {
+        Log.d(TAG, "getSearchResults: fine")
         return Pager(
             config = PagingConfig(
                 pageSize = 20,

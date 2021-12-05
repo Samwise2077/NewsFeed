@@ -15,11 +15,26 @@ private const val TAG = "HomeViewModel"
 class HomeViewModel @Inject constructor(
     private val repository: NewsRepository) : ViewModel(){
 
-    val searchQuery =  MutableLiveData("")
+    val searchQuery =  MutableLiveData("Trump")
+
+   /* val articlesFlow = combine(
+       searchQuery.asFlow()
+    ) {searchQuery}.flatMapLatest{
+        Log.d(TAG, ":ok")
+        repository.getSearchResults(searchQuery.toString())
+    }
+
+    val articles = articlesFlow.asLiveData()*/
+
 
     val articles =
         searchQuery.switchMap {Log.d(TAG, ":ok")
             repository.getSearchResults(it).cachedIn(viewModelScope)  }
+
+
+
+
+    //  val articles = articlesFlow.asLiveData()
 
     companion object{
         const val DEFAULT_QUERY = "Trump"
