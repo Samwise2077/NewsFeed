@@ -16,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfeed.R
 import com.example.newsfeed.data.NewsArticle
 import com.example.newsfeed.databinding.FragmentHomeBinding
@@ -56,7 +58,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAdapter.OnItemClickLi
                  }
                  true
              }
+
          }
+
         Log.d(TAG, "onViewCreated: check")
         viewModel.articles.observe(viewLifecycleOwner){
             Log.d(TAG, "${it} ")

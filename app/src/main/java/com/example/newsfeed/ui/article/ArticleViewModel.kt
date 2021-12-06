@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ArticleViewHolder @Inject constructor
+class ArticleViewModel @Inject constructor
     (private val state: SavedStateHandle,
      @ApplicationScope val applicationScope: CoroutineScope,
      private val articleDao: ArticleDao) : ViewModel() {

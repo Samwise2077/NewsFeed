@@ -11,7 +11,8 @@ interface ArticleDao{
     @Query("SELECT * FROM articles_table")
     fun getArticles() : Flow<List<NewsArticle>>
 
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(newsArticle: NewsArticle)
 
     @Update

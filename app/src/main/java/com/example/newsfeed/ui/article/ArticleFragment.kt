@@ -15,7 +15,7 @@ private const val TAG = "ArticleFragment"
 
 @AndroidEntryPoint
 class ArticleFragment : Fragment(R.layout.fragment_article) {
-    private val viewModel: ArticleViewHolder by viewModels()
+    private val viewModel: ArticleViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentArticleBinding.bind(view)
@@ -26,9 +26,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
         binding.apply {
             fab.setOnClickListener {
                 try {
-                    Log.d(TAG, "onViewCreated: start")
                     viewModel.onFavoritesChanged(viewModel.article)
-                    Log.d(TAG, "onViewCreated: finish")
                 }
                 catch (exception: Exception){
                     Log.e(TAG, "onViewCreated: ", exception)

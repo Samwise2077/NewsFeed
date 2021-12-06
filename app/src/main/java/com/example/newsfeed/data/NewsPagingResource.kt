@@ -23,9 +23,12 @@ class NewsPagingResource(
         return try {
             Log.d(TAG, "bind1: $newsApi")
             //var response: NewsResponse? = null
-
-              val  response =  newsApi.searchArticles(query, position, params.loadSize)
-
+             val response: NewsResponse = if(query.isNotEmpty()){
+                 newsApi.searchArticles(query, position, params.loadSize)
+             }
+             else{
+                 newsApi.searchBreakingNews("us", position, params.loadSize)
+             }
             val articles = response.articles
             Log.d(TAG, "bind2: ${response.articles}")
             LoadResult.Page(

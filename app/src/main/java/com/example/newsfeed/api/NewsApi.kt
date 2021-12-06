@@ -20,6 +20,13 @@ interface NewsApi {
         @Query("q") query: String,
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int,
-     //   @Query("apiKey") apiKey: String = CLIENT_ID
+    ) : NewsResponse
+
+    @Headers("X-Api-Key: ${CLIENT_ID}")
+    @GET("v2/top-headlines")
+    suspend fun searchBreakingNews(
+        @Query("country") country: String,
+        @Query("page") page: Int,
+       @Query("pageSize") pageSize: Int,
     ) : NewsResponse
 }
